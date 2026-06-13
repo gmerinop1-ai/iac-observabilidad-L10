@@ -47,7 +47,7 @@ docker compose ps
 ```bash
 docker compose down
 ```
-![Contenedores Detenidos con dashboards](./capturas/contenedores-stop-con-dashoard.png)
+![Contenedores Detenidos con dashboards](./capturas/contenedores-stop-con-dashboard.png)
 
 ### 5. Detener los contenedores (borrando dashboards y alarmas)
 ```bash
