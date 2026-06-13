@@ -19,7 +19,7 @@ Espera ~30 segundos y verifica el estado:
 ```bash
 docker compose ps
 ```
-![Contenedores corriendo](/home/zalethpg/iac-observabilidad/capturas/contenedores-levantados.png)
+![Contenedores corriendo](./capturas/contenedores-levantados.png)
 
 `backend`, `frontend`, `prometheus`, `loki` y `cadvisor` deben mostrar `Up (healthy)`. `alloy`, `grafana` y `node-exporter` muestran solo `Up`
 
@@ -47,10 +47,10 @@ docker compose ps
 ```bash
 docker compose down
 ```
-![Contenedores Detenidos con dashboards](/home/zalethpg/iac-observabilidad/capturas/contenedores-stop-con-dashoard.png)
+![Contenedores Detenidos con dashboards](./capturas/contenedores-stop-con-dashoard.png)
 
 ### 5. Detener los contenedores (borrando dashboards y alarmas)
 ```bash
 docker compose down -v   # borra también dashboards/alarmas creados
 ```
-![Contenedores detenidos totalmente](/home/zalethpg/iac-observabilidad/capturas/contenedores-stop.png)
+![Contenedores detenidos totalmente](./capturas/contenedores-stop.png)

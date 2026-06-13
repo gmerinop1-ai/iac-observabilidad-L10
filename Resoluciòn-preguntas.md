@@ -2,10 +2,7 @@
 
 ## Pregunta 1 — ¿Por qué necesitamos Loki además de Prometheus si ya tenemos `/metrics`?
 
-Durante el laboratorio tuve dos fuentes de información sobre el backend: el
-endpoint `/metrics` (recogido por Prometheus) y los logs JSON que escribe a
-stdout (recogidos por Alloy y almacenados en Loki). Al ejecutar el lab quedó
-claro que Prometheus mide, Loki narra. Son complementarios porque las
+Al ejecutar el lab quedó claro que Prometheus mide, Loki narra. Son complementarios porque las
 métricas cuantifican el comportamiento y los logs explican las causas.
 
 Prometheus almacena **series de tiempo numéricas**. Su modelo de datos es
@@ -18,13 +15,9 @@ ejecuta el escenario `fallo_conexion_inventario`, escribe esto a stdout:
 
 Loki sí: almacena streams de texto etiquetados y permite consultarlos con LogQL para filtrar por nivel, por
 servicio, o por cualquier campo del JSON.
----
+
 
 ## Pregunta 2 — ¿Qué ventaja aporta que las fuentes de datos de Grafana estén aprovisionadas como código y no creadas a mano?
-
-El archivo grafana/provisioning/datasources/datasources.yml define las
-conexiones a Prometheus y Loki. Grafana lo lee al arrancar y las configura
-automáticamente.
 
 La ventaja concreta del provisioning como código es la **Reproducibilidad sin pasos manuales.** 
 El archivo `grafana/provisioning/datasources/datasources.yml` define que Grafana debe
@@ -32,27 +25,15 @@ conectarse a `http://prometheus:9090` y a `http://loki:3100`. Cualquier persona
 que clone el repositorio y ejecute `docker compose up` obtiene exactamente el
 mismo entorno, sin necesidad de recordar que hay que ir a
 `Connections → Data sources → Add data source` y rellenar los campos
-manualmente. Si ese paso se olvida, los paneles del dashboard aparecen sin
-datos pero sin ningún mensaje de error claro — simplemente parece que las
-queries fallan.
----
+manualmente.
 
 ## Pregunta 3 — Los paneles "CPU contenedor" y "CPU host" muestran valores muy distintos. ¿Por qué? ¿Cuál usarías para alertar sobre una aplicación concreta?
-
-Esta diferencia quedó muy clara en el laboratorio al generar carga con:
-
-```bash
-curl "http://localhost:3001/load?seconds=60"
-```
-
-El panel **CPU contenedor** mostró un pico significativo. El panel **CPU host**
-mostró un incremento mucho menor en el mismo período.
 
 Para alertar sobre una aplicación concreta: siempre la métrica del
 contenedor. La CPU del host puede subir por procesos ajenos a la aplicación
 (cAdvisor, Prometheus, node-exporter). Con la métrica del contenedor, la
 alarma apunta exactamente al servicio que se quiere monitorear.
----
+
 
 ## Pregunta 4 — ¿Qué diferencia hay entre el *evaluation interval* y el *pending period* de una alarma?
 
