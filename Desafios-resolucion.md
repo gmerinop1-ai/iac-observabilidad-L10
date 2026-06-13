@@ -1,9 +1,5 @@
 # Desafíos y resolución — Laboratorio de Observabilidad
 
-**Curso:** Infraestructura como Código  
-**Alumna:** Grezia [apellido]  
-**Docente:** Walter Leturia Rodriguez
-
 Este documento registra los problemas reales que encontré al ejecutar el
 laboratorio, el proceso de diagnóstico que seguí en cada caso y la solución
 que apliqué. No todos los errores eran fallos del stack — algunos eran ruido
